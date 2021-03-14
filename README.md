@@ -13,4 +13,4 @@ Jump Challenge
 
 -- Press the button again to move the text from the right to the left (and change the button text)
 
--- Note – the user should be able to enter new text into either of the textboxes and it should still function as specified
+-- Note – the user should be able to enter new text into either of the textboxes and it should still function as specified.
