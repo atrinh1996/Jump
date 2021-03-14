@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <title>Jump Challenge</title>
+</head>
+<body>
+    <h1>Jump Challenge</h1>
+    <script>
+        const goRight = "JUMP>";
+        const goLeft = "<JUMP";
+    </script>
+
+    <form>
+        <input type='text' name='left' id='left'>
+        <input type='button' name='btn' id='btn' value='JUMP>'>
+        <input type='text' name='right' id='right'>
+
+        <script language="javascript">
+            $(document).ready(function() {
+                init();
+                detectInput("left", "right", goRight);
+                detectInput("right", "left", goLeft);
+                jump();
+            });
+
+            // initialize page to have empty textboxes, and button points right
+            function init() {
+                $("input[type='text']").val("");
+                $("input[name='btn']").val(goRight);
+            }
+
+            // Update button value as user inputs to a left or right textbox
+            function detectInput(curr, other, direction) {
+                $("input[name='" + curr + "']").on('input', function() {
+                    // clear the other text box
+                    $("input[name='" + other + "']").val("");
+                    $("input[name='btn']").val(direction);
+
+                });
+            }
+
+            // Update textboxes as button is clicked 
+            // (ie. move content to other box)
+            function jump() {
+                $("input[name='btn']").on('click', function() {
+                    if (validInput()) {
+                        if ($(this).val() == goRight) {
+                            let ltxt = $("input[name='left']").val();
+                            $("input[name='left']").val("");
+                            $("input[name='right']").val(ltxt);
+                            $(this).val(goLeft);
+                        } else {    // $(this).val() == goLeft;
+                            let rtxt = $("input[name='right']").val();
+                            $("input[name='right']").val("");
+                            $("input[name='left']").val(rtxt);
+                            $(this).val(goRight);
+                        }
+                    }
+                });
+            }
+
+            // Ensure button only changes value if a textbox has content
+            function validInput() {
+                let ltxt = $("input[name='left']").val();
+                let rtxt = $("input[name='right']").val();
+                return (ltxt != "" || rtxt != "") ? true : false;
+            }
+        </script>
+
+    </form>
+</body>
+</html>
